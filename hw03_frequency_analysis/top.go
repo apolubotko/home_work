@@ -20,7 +20,7 @@ func Top10(str string) []string {
 
 	s := []string{}
 
-	if len(str) == 0 {
+	if len(str) < topNum {
 		return nil
 	}
 
