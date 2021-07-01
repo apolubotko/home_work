@@ -26,7 +26,6 @@ func Top10(str string) []string {
 	wordsSlice := []*Word{}
 
 	s := []string{}
-
 	list := strings.Fields(str)
 
 	for _, word := range list {
