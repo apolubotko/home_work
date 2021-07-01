@@ -1,12 +1,18 @@
 package hw03frequencyanalysis
 
 import (
+	"errors"
+	"regexp"
 	"sort"
 	"strings"
 )
 
 const (
 	topNum = 10
+)
+
+var (
+	errWrongWord = errors.New("Not a word")
 )
 
 type Word struct {
@@ -20,14 +26,18 @@ func Top10(str string) []string {
 
 	s := []string{}
 
-	if len(str) < topNum {
-		return nil
-	}
-
 	list := strings.Fields(str)
 
 	for _, word := range list {
-		words[word]++
+		w, err := makeClean(word)
+		if err != nil {
+			continue
+		}
+		words[w]++
+	}
+
+	if len(words) < topNum {
+		return nil
 	}
 
 	for k, v := range words {
@@ -47,4 +57,17 @@ func Top10(str string) []string {
 	}
 
 	return s
+}
+
+func makeClean(s string) (string, error) {
+	lowerStr := strings.ToLower(s)
+
+	r := regexp.MustCompile(`(\p{L}+|\w+)\-?(\p{L}+|\w+)?`)
+	result := r.FindAllStringSubmatch(lowerStr, -1)
+
+	if r.MatchString(lowerStr) {
+		return result[0][0], nil
+	} else {
+		return "", errWrongWord
+	}
 }
