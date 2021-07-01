@@ -11,7 +11,10 @@ const (
 	topNum = 10
 )
 
-var errWrongWord = errors.New("not a word")
+var (
+	errWrongWord = errors.New("not a word")
+	r            = regexp.MustCompile(`(\p{L}+|\w+)\-?(\p{L}+|\w+)?`)
+)
 
 type Word struct {
 	name  string
@@ -60,7 +63,6 @@ func Top10(str string) []string {
 func makeClean(s string) (string, error) {
 	lowerStr := strings.ToLower(s)
 
-	r := regexp.MustCompile(`(\p{L}+|\w+)\-?(\p{L}+|\w+)?`)
 	result := r.FindAllStringSubmatch(lowerStr, -1)
 
 	if r.MatchString(lowerStr) {
