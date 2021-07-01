@@ -11,9 +11,7 @@ const (
 	topNum = 10
 )
 
-var (
-	errWrongWord = errors.New("Not a word")
-)
+var errWrongWord = errors.New("not a word")
 
 type Word struct {
 	name  string
@@ -70,5 +68,4 @@ func makeClean(s string) (string, error) {
 	}
 
 	return "", errWrongWord
-
 }
