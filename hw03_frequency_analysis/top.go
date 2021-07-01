@@ -67,7 +67,8 @@ func makeClean(s string) (string, error) {
 
 	if r.MatchString(lowerStr) {
 		return result[0][0], nil
-	} else {
-		return "", errWrongWord
 	}
+
+	return "", errWrongWord
+
 }
