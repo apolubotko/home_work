@@ -17,8 +17,22 @@ type ListItem struct {
 }
 
 type list struct {
-	List // Remove me after realization.
+	List
 	// Place your code here.
+	items []ListItem
+}
+
+func (l *list) Len() int {
+	return len(l.items)
+}
+
+func (l *list) Front() *ListItem {
+	return &l.items[0]
+}
+
+func (l *list) Back() *ListItem {
+	last := len(l.items) - 1
+	return &l.items[last]
 }
 
 func NewList() List {
