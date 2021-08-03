@@ -90,5 +90,4 @@ func TestRun(t *testing.T) {
 		require.Nil(t, err, "actual err - %v", err)
 		require.LessOrEqual(t, runTasksCount, int32(workersCount+maxErrorsCount), "extra tasks were started")
 	})
-
 }
