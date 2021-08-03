@@ -19,10 +19,9 @@ func Run(tasks []Task, n, m int) error {
 	wg.Add(n)
 	for i := 0; i < n; i++ {
 		go func(errCounter *int32) {
-			for {
-				task, ok := <-tasksCh
+			for task := range tasksCh {
 				mu.Lock()
-				if !ok || *errCounter >= int32(m) {
+				if *errCounter >= int32(m) {
 					mu.Unlock()
 					break
 				}
