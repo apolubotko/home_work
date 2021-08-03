@@ -91,11 +91,4 @@ func TestRun(t *testing.T) {
 		require.LessOrEqual(t, runTasksCount, int32(workersCount+maxErrorsCount), "extra tasks were started")
 	})
 
-	// t.Run("tasks without sleeps", func(t *testing.T) {
-
-	// 	require.Eventually(t, func() bool {
-	// 		return true
-	// 	},
-	// 		time.Second, 10*time.Millisecond, "some tests Eventually")
-	// })
 }
