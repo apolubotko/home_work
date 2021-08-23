@@ -9,7 +9,7 @@ type (
 type Stage func(in In) (out Out)
 
 func ExecutePipeline(in In, done In, stages ...Stage) Out {
-	out := in
+	out := wrapper(in, done)
 	for _, stage := range stages {
 		out = stage(wrapper(out, done))
 	}
@@ -19,7 +19,11 @@ func ExecutePipeline(in In, done In, stages ...Stage) Out {
 func wrapper(in In, done In) In {
 	out := make(Bi)
 	go func() {
-		defer close(out)
+		defer func() {
+			close(out)
+			for range in {
+			}
+		}()
 		for {
 			select {
 			case <-done:
