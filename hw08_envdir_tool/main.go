@@ -52,5 +52,4 @@ func checkArgs(s interface{}) {
 		fmt.Printf("wrong arg %#v", s)
 		os.Exit(1)
 	}
-
 }

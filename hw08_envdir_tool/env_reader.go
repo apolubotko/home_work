@@ -8,9 +8,7 @@ import (
 	"strings"
 )
 
-var (
-	errUnsetVar = errors.New("unset variable")
-)
+var errUnsetVar = errors.New("unset variable")
 
 type Environment map[string]EnvValue
 

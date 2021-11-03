@@ -8,7 +8,6 @@ import (
 
 // RunCmd runs a command + arguments (cmd) with environment variables from env.
 func RunCmd(cmd []string, env Environment) (returnCode int) {
-
 	for env, val := range env {
 		_, present := os.LookupEnv(env)
 		if present {
