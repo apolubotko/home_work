@@ -15,6 +15,7 @@ type User struct {
 type DomainStat map[string]int
 
 func GetDomainStat(r io.Reader, domain string) (DomainStat, error) {
+	var num int
 	searchStr := "." + domain
 	scanner := bufio.NewScanner(r)
 	result := make(DomainStat)
@@ -24,7 +25,7 @@ func GetDomainStat(r io.Reader, domain string) (DomainStat, error) {
 		email = fastjson.GetString(scanner.Bytes(), "Email")
 
 		if strings.HasSuffix(email, searchStr) {
-			num := result[strings.ToLower(strings.SplitN(email, "@", 2)[1])]
+			num = result[strings.ToLower(strings.SplitN(email, "@", 2)[1])]
 			num++
 			result[strings.ToLower(strings.SplitN(email, "@", 2)[1])] = num
 		}
