@@ -21,6 +21,7 @@ func GetDomainStat(r io.Reader, domain string) (DomainStat, error) {
 	result := make(DomainStat)
 
 	var email string
+
 	for scanner.Scan() {
 		email = fastjson.GetString(scanner.Bytes(), "Email")
 
