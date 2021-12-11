@@ -16,19 +16,19 @@ type DomainStat map[string]int
 
 func GetDomainStat(r io.Reader, domain string) (DomainStat, error) {
 	var num int
+	var key string
+	var email string
 	searchStr := "." + domain
 	scanner := bufio.NewScanner(r)
-	result := make(DomainStat)
-
-	var email string
+	result := make(DomainStat, 100000)
 
 	for scanner.Scan() {
 		email = fastjson.GetString(scanner.Bytes(), "Email")
-
 		if strings.HasSuffix(email, searchStr) {
-			num = result[strings.ToLower(strings.SplitN(email, "@", 2)[1])]
+			key = strings.ToLower(strings.SplitN(email, "@", 2)[1])
+			num = result[key]
 			num++
-			result[strings.ToLower(strings.SplitN(email, "@", 2)[1])] = num
+			result[key] = num
 		}
 	}
 
